@@ -1,0 +1,142 @@
+/* Estilo para a aba de Pacientes */
+/* #tab-patients {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+} */
+
+/* Barra de busca de pacientes */
+/* #searchBar {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+} */
+
+/* Lista de pacientes */
+/* #patientList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+} */
+
+/* #patientList li {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+} */
+
+/* #patientList li:hover {
+    background-color: #e0e0e0;
+} */
+
+/* Estilo de transição ao clicar no paciente */
+#patientList li.active {
+    background-color: #4CAF50;
+    color: white;
+}
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;  /* Centraliza horizontalmente o texto */
+    margin-top: 20px;
+    font-size: 36px;
+    color: #333;
+}
+
+.patient-details, .conversation-history, #midias-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+h2 {
+    color: #555;
+    font-size: 24px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+#midias-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.midia-item {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+audio, video {
+    width: 80%;
+    margin-top: 10px;
+}
+
+img {
+    margin-top: 10px;
+    width: 80%;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #0088cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0077bb;
+}
+
+#ver-mais {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#ver-mais:hover {
+    background-color: #005f7f;
+}

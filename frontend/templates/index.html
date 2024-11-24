@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ProjetoTCC</title>
+    <link rel="stylesheet" href="/static/css/style_geral.css">
+    <link rel="stylesheet" href="/static/css/style_graficos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/scripts_geral.js"></script>
+</head>
+<body>
+    <h1>ProjetoTCC</h1>
+
+    <!-- Barra de navegação para alternar entre abas -->
+    <nav>
+        <button onclick="showTab('graphics')">Gráficos</button>
+        <button onclick="showTab('patients')">Pacientes</button>
+    </nav>
+
+    <!-- Aba de gráficos -->
+    <div id="tab-graphics" class="tab-content">
+        <h2>Dashboard de Gráficos dos Pacientes</h2>
+        <div class="dashboard-cards">
+            <!-- Outros cards existentes -->
+            <div class="card">
+                <h2 id="total-usuarios">0</h2>
+                <p>Total de Usuários</p>
+            </div>
+        </div>
+        <div class="dashboard-grid">
+            <div class="card">
+                <h2>Monitoramento da Pressão Arterial (PA)<button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Qual foi a sua última medição de pressão arterial?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoPizzaPressaoArterial"></canvas>
+            </div>
+            <div class="card">
+                <h2>Hipertensão Arterial Crônica (HAS Crônica)<button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Sua pressão arterial elevada foi registrada antes da 20ª semana de gestação?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoPizzaPressao20"></canvas>
+            </div>
+            <div class="card">
+                <h2>Diagnóstico de Hipertensão Gestacional<button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Sua pressão arterial está elevada em 3 ocasiões diferentes?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoPizzaPressaoEm3"></canvas>
+            </div>
+            <div class="card">
+                <h2>Fez exame de urina <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Você já fez algum exame de urina recente para verificar a presença de proteína (proteinúria)?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoDonutsExameUrina"></canvas>
+            </div>
+            <div class="card medium-card">
+                <h2>Resultado do exame de urina <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Qual foi o resultado do exame de urina?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoBarrasProteinuria"></canvas>
+            </div>
+            <div class="card">
+                <h2>Níveis elevados de ácido úrico <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Seus exames laboratoriais indicaram níveis elevados de ácido úrico (maiores que 6mg/dl)?'), '_blank')">⤢</button></h2>
+                <canvas id="graficoDonutsElevadoAcidoUrico"></canvas>
+            </div>
+            <div class="card">
+                <h2>Pressão arterial elevada + Sintomas Pré-eclâmpsia Grave <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Você teve algum dos seguintes sintomas ou resultados em exames?\n(Oligúria, Creatinina elevada, Proteinúria massiva, Plaquetopenia, Aumento de TGO/TGP, Desidrogenase lática elevada)'), '_blank')">⤢</button></h2>
+                <canvas id="graficoDonutsEclampsiaGrave"></canvas>
+            </div>
+            <div class="card">
+                <h2>Sintomas de Eclâmpsia Iminente <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Você teve algum dos seguintes sintomas recentemente? (Convulsões, Perda de consciência, Confusão mental, Visão turva ou diplopia, Cefaleia intensa, Epigastralgia, Tontura, Escotomas cintilantes)'), '_blank')">⤢</button></h2>
+                <canvas id="graficoDonutsEclampsiaIminente"></canvas>
+            </div>
+            <div class="card medium-card">
+                <h2>Diagnóstico <button class="expand-btn" onclick="window.open('/grafico_expandido?pergunta=' + encodeURIComponent('Diagnóstico'), '_blank')">⤢</button></h2>
+                <canvas id="graficoBarrasDiagnosticos"></canvas>
+            </div>
+        </div>
+        
+        <!-- <div class="dashboard-cards">
+            <div class="card">
+                <h2 id="total-pre-eclampsia">0</h2>
+                <p>Casos de Pré-eclâmpsia</p>
+            </div>
+            <div class="card">
+                <h2 id="proteinuria-pre-eclampsia">0</h2>
+                <p>Com Proteinúria ≥ 300mg/24h</p>
+            </div>
+            <div class="card">
+                <h2 id="acido-urico-elevado">0</h2>
+                <p>Com Ácido Úrico Elevado</p>
+            </div>
+            <div class="card">
+                <h2 id="pre-eclampsia-grave">0</h2>
+                <p>Casos de Pré-eclâmpsia Grave</p>
+            </div>
+            <div class="card">
+                <h2 id="eclampsia-iminente">0</h2>
+                <p>Casos de Eclâmpsia Iminente</p>
+            </div>
+        </div> -->
+
+    </div>
+
+    <!-- Aba de pacientes -->
+    <div id="tab-patients" class="tab-content" style="display:none;">
+        <h2>Pacientes</h2>
+        <input type="text" id="searchBar" placeholder="Buscar paciente...">
+        <ul id="patientList">
+            <!-- Lista de pacientes será preenchida dinamicamente -->
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/scripts_graficos.js"></script>
+    <script src="/static/js/scripts_pacientes.js"></script>
+    <script>
+        // Chama os gráficos ao carregar a página
+        window.onload = function() {
+            showTab('graphics'); // Exibe a aba de gráficos automaticamente
+        }
+    </script>
+</body>
+</html>

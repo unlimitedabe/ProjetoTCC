@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico Expandido</title>
+    <!-- Vincula o CSS para estilizar os gráficos e layout da página -->
+    <link rel="stylesheet" href="/static/css/style_graficos.css">
+    <!-- Importa a biblioteca Chart.js para renderizar gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Exibe o título do gráfico expandido, representando a pergunta selecionada -->
+    <h1>{{ pergunta }} - Gráfico Expandido</h1>
+    
+    <!-- Container para o gráfico em tela cheia -->
+    <div class="large-chart">
+        <canvas id="graficoExpandido"></canvas>
+    </div>
+    
+    <!-- Seção que lista os pacientes por resposta -->
+    <div class="pacientes-lista">
+        <h2>Pacientes por Resposta:</h2>
+        <!-- Loop pelos dados das respostas, fornecendo uma lista de pacientes por cada resposta -->
+        {% for resposta, nomes in labels.items() %}
+            <h3>{{ resposta }}</h3>
+            <ul>
+                <!-- Loop pelos nomes dos pacientes para cada resposta -->
+                {% for nome in nomes %}
+                    <li>{{ nome }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+
+    <!-- Importa o JavaScript para manipular e gerar o gráfico -->
+    <script src="/static/js/scripts_graficos.js"></script>
+</body>
+</html>

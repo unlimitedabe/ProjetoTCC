@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Paciente</title>
+    <link rel="stylesheet" href="/static/css/style_pacientes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/scripts_pacientes.js"></script>
+</head>
+<body>
+    <h1>Perfil de {{ patient[0] }}</h1>
+
+    <!-- Informações Gerais -->
+    <div class="patient-details">
+        <h2>Informações Gerais</h2>
+        <p>Nome: {{ patient[0] }}</p>
+        <p>Último DIagnóstico: {{ ultima_conclusao if ultima_conclusao else "Nenhuma conclusão disponível" }}</p> <!-- Exibir conclusão ou mensagem -->
+    </div>
+
+
+    <!-- Sintomas / Histórico de Conversa -->
+    <div class="conversation-history">
+        <h2>Sintomas / Histórico de Conversa</h2>
+        <ul id="historico-respostas">
+            {% for item in ultimas_mensagens %}
+            <li>{{ item[2] }} ({{ item[4] }}): {{ item[3] }}</li> <!-- Exibir data formatada e mensagem -->
+            {% endfor %}
+        </ul>
+        <button id="ver-mais" onclick="mostrarMensagensAnteriores('{{ patient[3] }}')">Ver mensagens anteriores</button>
+    </div>
+
+
+    <!-- Mídias -->
+    <div id="midias-container">
+        <h2>Mídias</h2>
+        <!-- As mídias enviadas pelo paciente aparecerão aqui -->
+    </div>
+
+    <script>
+        // Chamar a função para exibir as mídias quando o perfil do paciente for carregado
+        exibirMidias();
+    </script>
+    
+    <!-- <button onclick="sendTelegramMessage()">Orientar Paciente</button> -->
+    
+    <script src="/static/js/"></script>
+</body>
+</html>
