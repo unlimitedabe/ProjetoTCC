@@ -1,9 +1,11 @@
-from flask import Flask, render_template, jsonify, request, send_from_directory
+from flask import Flask, render_template, jsonify, session, request, send_from_directory, abort
+import secrets
 import os  # Biblioteca para operações relacionadas ao sistema de arquivos
 # Conexão com o banco de dados definida externamente
 from database import get_db_connection
 import numpy as np  # Biblioteca NumPy para manipulação de dados numéricos
 import urllib.parse  # Para decodificar strings de URL
+from flask_talisman import Talisman
 
 # Definir o caminho correto para as pastas de templates e arquivos estáticos do frontend
 template_dir = os.path.abspath(os.path.join(
@@ -15,6 +17,47 @@ media_dir = os.path.abspath(os.path.join(
 
 # Inicializa o Flask com o caminho das pastas de templates e arquivos estáticos
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
+
+# Aplica configurações de cabeçalhos de segurança
+Talisman(app, content_security_policy={
+    # Recursos do próprio domínio
+    'default-src': "'self'",
+    # Permitir scripts do domínio e CDN
+    'script-src': "'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+    'style-src': "'self' 'unsafe-inline'",              # Permitir estilos inline
+    # Permitir imagens do domínio e base64
+    'img-src': "'self' data:'",
+    # Permitir conexões com APIs externas
+    'connect-src': "'self' https://api.exemplo.com"
+})
+
+
+@app.before_request
+def csrf_protect():
+    if request.method == "POST":
+        token = session.get("csrf_token")
+        request_token = request.headers.get("X-CSRF-Token")
+        if not token or not request_token or token != request_token:
+            abort(403)
+
+
+@app.route('/form', methods=['GET', 'POST'])
+def form():
+    if request.method == 'GET':
+        # Gera um token CSRF para a sessão
+        session['csrf_token'] = secrets.token_hex(16)
+        return render_template('form.html', csrf_token=session['csrf_token'])
+    # Processa requisição POST
+    return 'Formulário enviado com sucesso'
+
+
+@app.route('/processar_dados', methods=['POST'])
+def processar_dados():
+    user_input = request.json.get('input')
+    if not user_input.isalnum():
+        return jsonify({'error': 'Entrada inválida'}), 400
+    # Processar dado válido
+    return jsonify({'message': 'Entrada processada com sucesso'})
 
 # Função para buscar respostas no banco de dados e formatá-las para gráficos
 
