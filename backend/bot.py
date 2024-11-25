@@ -262,22 +262,16 @@ def verificar_ou_inserir_usuario(usuario_id, nome_usuario):
             try:
                 with connection.cursor() as cursor:
                     # Verificar se o usuário já existe
-                    cursor.execute(
-                        "SELECT 1 FROM usuarios WHERE usuario_id = %s", (usuario_id,))
+                    query_check = "SELECT 1 FROM usuarios WHERE usuario_id = %s"
+                    cursor.execute(query_check, (usuario_id,))
                     if cursor.fetchone() is None:
-                        # Se o usuário não existir, insira o usuário na tabela
-                        insert_query = "INSERT INTO usuarios (usuario_id, nome) VALUES (%s, %s)"
+                        # Insere o usuário
+                        query_insert = "INSERT INTO usuarios (usuario_id, nome) VALUES (%s, %s)"
                         cursor.execute(
-                            insert_query, (usuario_id, nome_usuario))
-                        connection.commit()  # Confirma a inserção do usuário
+                            query_insert, (usuario_id, nome_usuario))
+                        connection.commit()
                         print(
                             f"Usuário {usuario_id} inserido no banco de dados.")
-
-                        # Pausa breve para garantir que o commit seja refletido (para teste)
-                        time.sleep(2)
-                    else:
-                        print(
-                            f"Usuário {usuario_id} já existe no banco de dados.")
             except Exception as e:
                 print(f"Erro ao verificar ou inserir usuário: {e}")
 
@@ -285,17 +279,16 @@ def verificar_ou_inserir_usuario(usuario_id, nome_usuario):
 # Função para salvar respostas no banco de dados
 def salvar_resposta(telegram_user_id, pergunta, resposta):
     usuario_id = get_usuario_id_by_telegram_id(telegram_user_id)
-    # if usuario_id:
     with get_db_connection() as connection:
         if connection:
             try:
                 with connection.cursor() as cursor:
-                    insert_query = """
+                    query_insert = """
                     INSERT INTO respostas (usuario_id, pergunta, resposta)
                     VALUES (%s, %s, %s)
                     """
                     cursor.execute(
-                        insert_query, (usuario_id, pergunta, resposta))
+                        query_insert, (usuario_id, pergunta, resposta))
                     connection.commit()
                     print(f"Resposta salva no banco de dados: {resposta}")
             except Exception as e:
@@ -308,8 +301,8 @@ def get_usuario_id_by_telegram_id(telegram_user_id):
         if connection:
             try:
                 with connection.cursor() as cursor:
-                    cursor.execute(
-                        "SELECT id FROM usuarios WHERE usuario_id = %s", (telegram_user_id,))
+                    query = "SELECT id FROM usuarios WHERE usuario_id = %s"
+                    cursor.execute(query, (telegram_user_id,))
                     result = cursor.fetchone()
                     if result:
                         return result[0]

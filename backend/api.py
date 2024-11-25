@@ -109,7 +109,8 @@ def grafico_expandido():
 def listar_pacientes():
     with get_db_connection() as connection:
         cursor = connection.cursor()
-        cursor.execute("SELECT id, nome FROM usuarios")
+        query = "SELECT id, nome FROM usuarios"
+        cursor.execute(query)  # Sem parâmetros
         patients = cursor.fetchall()
         cursor.close()
     return jsonify([{'id': p[0], 'nome': p[1]} for p in patients])
@@ -122,31 +123,44 @@ def perfil_paciente(id):
     with get_db_connection() as connection:
         cursor = connection.cursor()
 
-        # Busca informações do paciente
-        cursor.execute(
-            "SELECT nome, usuario_id, data_registro, id FROM usuarios WHERE id = %s", (id,))
+        # Buscar informações do paciente
+        query_patient = """
+        SELECT nome, usuario_id, data_registro, id 
+        FROM usuarios 
+        WHERE id = %s
+        """
+        cursor.execute(query_patient, (id,))
         patient = cursor.fetchone()
 
-        # Busca as últimas 5 mensagens do paciente
-        cursor.execute("""
-            SELECT * FROM respostas
-            WHERE usuario_id = %s
-            ORDER BY data_resposta DESC
-            LIMIT 5
-        """, (id,))
+        # Buscar as últimas 5 mensagens do paciente
+        query_messages = """
+        SELECT * FROM respostas
+        WHERE usuario_id = %s
+        ORDER BY data_resposta DESC
+        LIMIT 5
+        """
+        cursor.execute(query_messages, (id,))
         ultimas_mensagens = cursor.fetchall()
 
-        # Busca a última conclusão de diagnóstico do paciente
-        cursor.execute("""
-            SELECT resposta FROM respostas
-            WHERE usuario_id = %s AND pergunta = 'Diagnóstico'
-            ORDER BY data_resposta DESC LIMIT 1
-        """, (id,))
+        # Buscar a última conclusão de diagnóstico do paciente
+        query_diagnosis = """
+        SELECT resposta 
+        FROM respostas
+        WHERE usuario_id = %s AND pergunta = 'Diagnóstico'
+        ORDER BY data_resposta DESC
+        LIMIT 1
+        """
+        cursor.execute(query_diagnosis, (id,))
         ultima_conclusao = cursor.fetchone()
-
         cursor.close()
 
-    return render_template('perfil_pacientes.html', patient=patient, ultimas_mensagens=ultimas_mensagens, ultima_conclusao=ultima_conclusao[0] if ultima_conclusao else None)
+    return render_template(
+        'perfil_pacientes.html',
+        patient=patient,
+        ultimas_mensagens=ultimas_mensagens,
+        ultima_conclusao=ultima_conclusao[0] if ultima_conclusao else None
+    )
+
 
 # Rota para buscar todas as mensagens de um paciente
 
@@ -155,11 +169,12 @@ def perfil_paciente(id):
 def mensagens_anteriores(usuario_id):
     with get_db_connection() as connection:
         cursor = connection.cursor()
-        cursor.execute("""
-            SELECT * FROM respostas
-            WHERE usuario_id = %s
-            ORDER BY data_resposta DESC
-        """, (usuario_id,))
+        query = """
+        SELECT * FROM respostas
+        WHERE usuario_id = %s
+        ORDER BY data_resposta DESC
+        """
+        cursor.execute(query, (usuario_id,))
         mensagens = cursor.fetchall()
         cursor.close()
 
