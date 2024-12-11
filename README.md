@@ -99,6 +99,9 @@ media/
 ---
 
 ## **Como Rodar o Projeto**
+### 0. Crie seu database
+Nesse projeto foi utilizando o postgresql, e o script está no backend/script_database.txt
+
 ### 1. Configurar o `bot.py`
 Substitua o token pelo do seu bot:
 
