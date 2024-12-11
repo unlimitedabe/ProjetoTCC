@@ -26,9 +26,8 @@ os.makedirs(legendado_directory, exist_ok=True)
 # Carregar o modelo Whisper para transcrição
 modelo = whisper.load_model("base")
 
+
 # Função para verificar se o vídeo já foi legendado
-
-
 def is_video_legendado(video_path):
     connection = connect_db()
     if connection:
@@ -45,9 +44,8 @@ def is_video_legendado(video_path):
             return True
     return False
 
+
 # Função para atualizar o status de legendagem e salvar transcrição no banco de dados
-
-
 def atualizar_status_legendagem(video_path, transcricao_texto):
     connection = connect_db()
     if connection:
@@ -65,9 +63,8 @@ def atualizar_status_legendagem(video_path, transcricao_texto):
         print(f"Status de legendagem e texto transcrito atualizado para {
               video_path}")
 
+
 # Classe para lidar com eventos de criação de arquivos de vídeo
-
-
 class VideoHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.is_directory:
@@ -130,9 +127,8 @@ class VideoHandler(FileSystemEventHandler):
             except Exception as e:
                 print(f"Erro ao processar o vídeo {video_path}: {e}")
 
+
 # Função para criar clipes de legendas
-
-
 def create_subtitle_clips(segments, video):
     clips = []
     for segment in segments:
@@ -148,9 +144,8 @@ def create_subtitle_clips(segments, video):
             clips.append(txt_clip)
     return clips
 
+
 # Função para monitorar o diretório de vídeo em busca de novos arquivos
-
-
 def monitor_video_directory():
     print(f"Monitorando o diretório de vídeos: {video_directory}")
     event_handler = VideoHandler()

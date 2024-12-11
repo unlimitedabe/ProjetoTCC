@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, session, request, send_from_directory, abort
+from flask import Flask, render_template, jsonify, session, request, send_from_directory, abort, send_file
 import secrets
 import os  # Biblioteca para operações relacionadas ao sistema de arquivos
 # Conexão com o banco de dados definida externamente
@@ -6,6 +6,7 @@ from database import get_db_connection
 import numpy as np  # Biblioteca NumPy para manipulação de dados numéricos
 import urllib.parse  # Para decodificar strings de URL
 from flask_talisman import Talisman
+import pandas as pd
 
 # Definir o caminho correto para as pastas de templates e arquivos estáticos do frontend
 template_dir = os.path.abspath(os.path.join(
@@ -59,9 +60,8 @@ def processar_dados():
     # Processar dado válido
     return jsonify({'message': 'Entrada processada com sucesso'})
 
+
 # Função para buscar respostas no banco de dados e formatá-las para gráficos
-
-
 def obter_dados_grafico(pergunta):
     with get_db_connection() as connection:
         cursor = connection.cursor()
@@ -80,9 +80,8 @@ def obter_dados_grafico(pergunta):
 
         return {'labels': labels, 'data': data}
 
+
 # Função para buscar mídias e transcrições do banco de dados
-
-
 def obter_midias():
     with get_db_connection() as connection:
         cursor = connection.cursor()
@@ -110,9 +109,8 @@ def obter_midias():
 
         return midias
 
+
 # Rota para fornecer dados de gráfico com base em uma pergunta
-
-
 @app.route('/dados_grafico')
 def dados_grafico():
     pergunta = request.args.get('pergunta')  # Obtém a pergunta da query string
@@ -120,9 +118,8 @@ def dados_grafico():
     dados = obter_dados_grafico(pergunta)
     return jsonify(dados)
 
+
 # Rota para renderizar um gráfico expandido com nomes de usuários associados às respostas
-
-
 @app.route('/grafico_expandido')
 def grafico_expandido():
     pergunta = request.args.get('pergunta')
@@ -145,9 +142,8 @@ def grafico_expandido():
 
         return render_template('grafico_expandido.html', pergunta=pergunta, labels=labels)
 
+
 # Rota para listar os pacientes e retornar em formato JSON
-
-
 @app.route('/api/pacientes')
 def listar_pacientes():
     with get_db_connection() as connection:
@@ -158,9 +154,8 @@ def listar_pacientes():
         cursor.close()
     return jsonify([{'id': p[0], 'nome': p[1]} for p in patients])
 
+
 # Rota para renderizar o perfil de um paciente específico
-
-
 @app.route('/paciente/<int:id>')
 def perfil_paciente(id):
     with get_db_connection() as connection:
@@ -206,8 +201,6 @@ def perfil_paciente(id):
 
 
 # Rota para buscar todas as mensagens de um paciente
-
-
 @app.route('/paciente/mensagens-anteriores/<int:usuario_id>')
 def mensagens_anteriores(usuario_id):
     with get_db_connection() as connection:
@@ -223,24 +216,21 @@ def mensagens_anteriores(usuario_id):
 
     return jsonify(mensagens)
 
+
 # Rota para servir arquivos de mídia
-
-
 @app.route('/media/<path:filename>')
 def media(filename):
     return send_from_directory(media_dir, filename)
 
+
 # Rota para fornecer as mídias em formato JSON
-
-
 @app.route('/obter_midias')
 def obter_midias_route():
     midias = obter_midias()
     return jsonify(midias)
 
+
 # Rota para servir o arquivo index_graphic.html
-
-
 @app.route('/graphics')
 def graphics():
     return render_template('index_graphic.html')
@@ -258,9 +248,48 @@ def total_usuarios():
 
     return jsonify({'totalUsuarios': total_usuarios})
 
+
+# Rota para retornar os dados da tabela resposta
+@app.route('/export/respostas_excel', methods=['GET'])
+def export_excel():
+    with get_db_connection() as connection:
+        if connection:
+            try:
+                # Query para pegar os dados da tabela respostas
+                query = "SELECT * FROM respostas"
+                df = pd.read_sql_query(query, connection)
+
+                # Cria um arquivo Excel temporário
+                file_path = "respostas_export.xlsx"
+                df.to_excel(file_path, index=False)
+
+                # Envia o arquivo para download
+                return send_file(file_path, as_attachment=True)
+            except Exception as e:
+                return {"error": f"Erro ao exportar: {e}"}, 500
+
+
+# Rota para retornar os dados da tabela usuarios
+@app.route('/export/usuarios_excel', methods=['GET'])
+def export_usuarios():
+    with get_db_connection() as connection:
+        if connection:
+            try:
+                # Query para pegar os dados da tabela usuarios
+                query = "SELECT * FROM usuarios"
+                df = pd.read_sql_query(query, connection)
+
+                # Cria um arquivo Excel temporário
+                file_path = "usuarios_export.xlsx"
+                df.to_excel(file_path, index=False)
+
+                # Envia o arquivo para download
+                return send_file(file_path, as_attachment=True)
+            except Exception as e:
+                return {"error": f"Erro ao exportar: {e}"}, 500
+
+
 # Rota principal que renderiza a página index.html
-
-
 @app.route('/')
 def index():
     return render_template('index.html')

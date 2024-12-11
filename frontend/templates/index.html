@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/css/style_geral.css">
     <link rel="stylesheet" href="/static/css/style_graficos.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="/static/js/scripts_geral.js"></script>
 </head>
 <body>
@@ -23,7 +24,7 @@
         <h2>Dashboard de Gráficos dos Pacientes</h2>
         <div class="dashboard-cards">
             <!-- Outros cards existentes -->
-            <div class="card">
+            <div class="card-usuario">
                 <h2 id="total-usuarios">0</h2>
                 <p>Total de Usuários</p>
             </div>
@@ -66,30 +67,21 @@
                 <canvas id="graficoBarrasDiagnosticos"></canvas>
             </div>
         </div>
+        <div class="button-container">
+            <button onclick="downloadExcel()">Exportar tabela de Respostas</button>
+            <script>
+                function downloadExcel() {
+                    window.location.href = "/export/respostas_excel";
+                }
+            </script>
         
-        <!-- <div class="dashboard-cards">
-            <div class="card">
-                <h2 id="total-pre-eclampsia">0</h2>
-                <p>Casos de Pré-eclâmpsia</p>
-            </div>
-            <div class="card">
-                <h2 id="proteinuria-pre-eclampsia">0</h2>
-                <p>Com Proteinúria ≥ 300mg/24h</p>
-            </div>
-            <div class="card">
-                <h2 id="acido-urico-elevado">0</h2>
-                <p>Com Ácido Úrico Elevado</p>
-            </div>
-            <div class="card">
-                <h2 id="pre-eclampsia-grave">0</h2>
-                <p>Casos de Pré-eclâmpsia Grave</p>
-            </div>
-            <div class="card">
-                <h2 id="eclampsia-iminente">0</h2>
-                <p>Casos de Eclâmpsia Iminente</p>
-            </div>
-        </div> -->
-
+            <button onclick="downloadUsuarios()">Exportar tabela de Usuários</button>
+            <script>
+                function downloadUsuarios() {
+                    window.location.href = "/export/usuarios_excel";
+                }
+            </script>
+        </div>
     </div>
 
     <!-- Aba de pacientes -->

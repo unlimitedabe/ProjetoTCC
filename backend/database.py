@@ -6,11 +6,11 @@ from contextlib import contextmanager
 def connect_db():
     try:
         connection = psycopg2.connect(
-            host="localhost",  # Endereço do servidor
-            database="aurora_db_3",  # Nome do banco de dados
-            user="postgres",  # Seu usuário no PostgreSQL
-            password="root1",  # Senha do PostgreSQL
-            port="5435"  # Porta do PostgreSQL
+            host="seu_host",  # Endereço do servidor
+            database="seu_database",  # Nome do banco de dados
+            user="seu_user",  # Seu usuário no PostgreSQL
+            password="sua_senha",  # Senha do PostgreSQL
+            port="sua_porta"  # Porta do PostgreSQL
         )
         return connection
     except Exception as e:

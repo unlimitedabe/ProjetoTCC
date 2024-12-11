@@ -7,7 +7,7 @@ function criarGraficoPizza(ctx, pergunta) {
             datasets: [{
                 label: 'Respostas',
                 data: [],
-                backgroundColor: ['#4682B4', '#FF6347', '#FFCE56'],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
                 hoverOffset: 4
             }]
         },
@@ -29,9 +29,24 @@ function criarGraficoPizza(ctx, pergunta) {
                             return label;
                         }
                     }
+                },
+                datalabels: { // Configuração do plugin
+                    color: '#FFFFFF', // Cor do número
+                    font: {
+                        size: 14, // Tamanho do número
+                        weight: 'bold' // Peso do número
+                    },
+                    textStrokeColor: '#000000', // Cor da borda (preto)
+                    textStrokeWidth: 3, // Largura da borda
+                    formatter: (value, ctx) => {
+                        return value; // Exibe o valor
+                    },
+                    align: 'center', // Alinhamento (centralizado na fatia)
+                    anchor: 'center' // Posição (âncora no centro da fatia)
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels] // Adiciona o plugin
     });
 
     // Função para buscar os dados do backend e atualizar o gráfico
@@ -61,7 +76,7 @@ function criarGraficoDonuts(ctx, pergunta) {
             datasets: [{
                 label: 'Respostas',
                 data: [],
-                backgroundColor: ['#FFCE56', '#4BC0C0', '#FF6384'],
+                backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56'],
                 hoverOffset: 4
             }]
         },
@@ -83,9 +98,24 @@ function criarGraficoDonuts(ctx, pergunta) {
                             return label;
                         }
                     }
+                },
+                datalabels: { // Configuração do plugin
+                    color: '#FFFFFF', // Cor do número
+                    font: {
+                        size: 14, // Tamanho do número
+                        weight: 'bold' // Peso do número
+                    },
+                    textStrokeColor: '#000000', // Cor da borda (preto)
+                    textStrokeWidth: 3, // Largura da borda
+                    formatter: (value, ctx) => {
+                        return value; // Exibe o valor
+                    },
+                    align: 'center', // Alinhamento (centralizado na fatia)
+                    anchor: 'center' // Posição (âncora no centro da fatia)
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels] // Adiciona o plugin
     });
 
     // Função para buscar os dados do backend e atualizar o gráfico
@@ -260,9 +290,24 @@ function criarGraficoExpandido(pergunta, labels, data) {
                             return label;
                         }
                     }
+                },
+                datalabels: { // Configuração do plugin
+                    color: '#FFFFFF', // Cor do número
+                    font: {
+                        size: 14, // Tamanho do número
+                        weight: 'bold' // Peso do número
+                    },
+                    textStrokeColor: '#000000', // Cor da borda (preto)
+                    textStrokeWidth: 3, // Largura da borda
+                    formatter: (value, ctx) => {
+                        return value; // Exibe o valor
+                    },
+                    align: 'center', // Alinhamento (centralizado na fatia)
+                    anchor: 'center' // Posição (âncora no centro da fatia)
                 }
             }
-        }
+        },
+        plugins: [ChartDataLabels] // Adiciona o plugin
     });
 }
 

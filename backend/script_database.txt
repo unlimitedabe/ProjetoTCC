@@ -1,0 +1,39 @@
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT UNIQUE NOT NULL, 
+    nome VARCHAR(100),
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Criar tabela de mídias
+CREATE TABLE midias (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE,
+    tipo_midia VARCHAR(50),
+    caminho_arquivo VARCHAR(255),
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status_transcricao BOOLEAN DEFAULT FALSE,
+    status_legendagem BOOLEAN DEFAULT FALSE
+);
+
+-- Criar tabela de respostas
+CREATE TABLE respostas (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE,
+    pergunta VARCHAR(255),
+    resposta VARCHAR(255),
+    data_resposta TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE midias 
+ADD COLUMN transcricao_audio TEXT,
+ADD COLUMN transcricao_video TEXT;
+
+ALTER TABLE usuarios
+ALTER COLUMN usuario_id TYPE BIGINT;
+
+ALTER TABLE respostas
+ALTER COLUMN usuario_id TYPE BIGINT;
+
+ALTER TABLE midias
+ALTER COLUMN usuario_id TYPE BIGINT;
