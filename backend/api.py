@@ -86,7 +86,7 @@ def obter_midias():
     with get_db_connection() as connection:
         cursor = connection.cursor()
         query = """
-        SELECT tipo_midia, caminho_arquivo, transcricao_audio, transcricao_video
+        SELECT tipo_midia, caminho_arquivo, transcricao_audio, transcricao_video, status_legendagem
         FROM midias
         """
         cursor.execute(query)
@@ -95,15 +95,21 @@ def obter_midias():
 
         midias = []
         for row in results:
-            # Ajusta o caminho para relativo
-            caminho_relativo = os.path.relpath(row[1], media_dir)
+            tipo_midia, caminho_arquivo, transcricao_audio, transcricao_video, status_legendagem = row
+
+            if tipo_midia == 'video' and status_legendagem:
+                # Substituir caminho para o vídeo legendado
+                caminho_arquivo = os.path.join('legendado', os.path.basename(
+                    caminho_arquivo).replace('.mp4', '_legendado.mp4'))
+            else:
+                # Ajustar caminho relativo para outros tipos de mídia
+                caminho_arquivo = os.path.relpath(caminho_arquivo, media_dir)
+
             midia = {
-                'tipo': row[0],  # Tipo da mídia (áudio, imagem, vídeo)
-                'caminho': caminho_relativo,  # Caminho relativo do arquivo
-                # Transcrição de áudio, se disponível
-                'transcricao_audio': row[2],
-                # Transcrição de vídeo, se disponível
-                'transcricao_video': row[3]
+                'tipo': tipo_midia,
+                'caminho': caminho_arquivo,  # Caminho atualizado
+                'transcricao_audio': transcricao_audio,
+                'transcricao_video': transcricao_video
             }
             midias.append(midia)
 
@@ -235,9 +241,8 @@ def obter_midias_route():
 def graphics():
     return render_template('index_graphic.html')
 
+
 # Rota para contar e retornar o número total de usuários
-
-
 @app.route('/total_usuarios')
 def total_usuarios():
     with get_db_connection() as conn:
