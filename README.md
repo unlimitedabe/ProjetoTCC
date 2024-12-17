@@ -1,4 +1,5 @@
 # **Autor: Rafael de Matos Abe**
+# **Co-Autor: Gabriel Fellipe Felix Lima**
 # **Orientador: Talles Marcelo Gonçalves de Andrade Barbosa**
 # **Universidade: Pontifícia Universidade Católica de Goiás**
 # **Trabalho de Conclusão de Curso**
@@ -64,6 +65,8 @@ Os casos de uso foram baseados no trabalho de Gabriel Lima e possibilitam:
 - Diagnóstico de hipertensão arterial crônica, pré-eclâmpsia e eclâmpsia iminente.
 - Monitoramento contínuo de sinais clínicos como pressão arterial e proteinúria.
 - Acompanhamento e encaminhamento adequado.
+
+>LIMA, Gabriel Fellipe Felix. **Desenvolvimento de um software para apoio ao diagnóstico da gestação de alto risco**. Programa de Iniciação Científica: PIBITI/CNPq. Orientador: Talles Marcelo Gonçalves de Andrade Barbosa. Goiânia: Pontifícia Universidade Católica de Goiás, 2023. Disponível em: <https://sistemas.pucgoias.edu.br/sigep/espelhoIniciacaoCientifica/show/22534>. Acesso em: 09 out. 2024.
 
 ### **Fluxos**
 1. Diagnóstico de Pré-eclâmpsia:
