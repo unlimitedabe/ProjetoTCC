@@ -253,3 +253,9 @@ As possíveis melhorias e expansões do sistema incluem:
 - **Testes com Outras Plataformas**: Explorar a aplicação em plataformas como WhatsApp ou Signal.
 
 ---
+
+## **Vídeo Apresentação do TCC**
+O vídeo de apresentação do projeto sendo executando está disponível no seguinte drive:
+[https://drive.google.com/drive/folders/1dv9AD24964Er97L_K5HMkxa0c8RNLRoz?usp=drive_link](https://drive.google.com/drive/folders/1dv9AD24964Er97L_K5HMkxa0c8RNLRoz?usp=sharing)
+
+---
