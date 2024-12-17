@@ -258,7 +258,7 @@ As possíveis melhorias e expansões do sistema incluem:
 ---
 
 ## **Vídeo Apresentação do TCC**
-vídeo de apresentação do projeto sendo executando está disponível no arquivo do projeto nomeado como: "Video de Apresentação TCC.mp4" 
+vídeo de apresentação do projeto sendo executando está disponível no arquivo do projeto nomeado como: "Video de Apresentação TCC.MP4" 
 https://github.com/unlimitedabe/ProjetoTCC#:~:text=Video%20Apresenta%C3%A7%C3%A3o%20TCC.MP4
 
 Ou em qualidade melhor, vídeo de apresentação do projeto sendo executando está disponível no seguinte drive:
