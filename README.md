@@ -1,6 +1,8 @@
-# **Autor: Rafael de Matos Abe - Pontifícia Universidade Católica de Goiás**
+# **Autor: Rafael de Matos Abe**
+# **Orientador: Talles Marcelo Gonçalves de Andrade Barbosa**
+# **Universidade: Pontifícia Universidade Católica de Goiás**
 # **Trabalho de Conclusão de Curso**
-# **Projeto: Telemonitoramento para Gestantes em Situação de Risco de Pré-eclâmpsia e Eclâmpsia**
+# **Projeto: Customização do Telegram Para Aplicações em Saúde (Telemonitoramento para Gestantes em Situação de Risco de Pré-eclâmpsia e Eclâmpsia)**
 
 ## **Descrição do Projeto**
 Este projeto visa criar um sistema de **telemonitoramento** para gestantes em risco de **hipertensão arterial crônica**, **pré-eclâmpsia** e **eclâmpsia iminente**, utilizando o **Telegram** como plataforma base. O sistema permite:
