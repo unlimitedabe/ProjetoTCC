@@ -1,5 +1,4 @@
-# **Autor: Rafael de Matos Abe**
-# **Co-Autor: Gabriel Fellipe Felix Lima**
+# **Autores: Rafael de Matos Abe e Gabriel Fellipe Felix Lima**
 # **Orientador: Talles Marcelo Gonçalves de Andrade Barbosa**
 # **Universidade: Pontifícia Universidade Católica de Goiás**
 # **Trabalho de Conclusão de Curso**
