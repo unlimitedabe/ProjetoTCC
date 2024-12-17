@@ -5,7 +5,7 @@
 # **Projeto: Customização do Telegram Para Aplicações em Saúde (Telemonitoramento para Gestantes em Situação de Risco de Pré-eclâmpsia e Eclâmpsia)**
 
 ## **Descrição do Projeto**
-Este projeto visa criar um sistema de **telemonitoramento** para gestantes em risco de **hipertensão arterial crônica**, **pré-eclâmpsia** e **eclâmpsia iminente**, utilizando o **Telegram** como plataforma base. O sistema permite:
+Este projeto visa criar um sistema de **telemonitoramento** para gestantes em risco de **hipertensão arterial crônica**, **pré-eclâmpsia** e **eclâmpsia iminente**, utilizando o **Telegram** como plataforma base. O sistema possibilita:
 - Envio e monitoramento de respostas de pacientes.
 - Integração com mídias (áudios, vídeos e fotos).
 - Análise e visualização de dados através de uma interface gráfica.
@@ -60,7 +60,7 @@ O modelo de relacionamento do banco de dados foi desenhado para suportar as func
 ---
 
 ## **Casos de Uso**
-Os casos de uso foram baseados no trabalho de Gabriel Lima e permitem:
+Os casos de uso foram baseados no trabalho de Gabriel Lima e possibilitam:
 - Diagnóstico de hipertensão arterial crônica, pré-eclâmpsia e eclâmpsia iminente.
 - Monitoramento contínuo de sinais clínicos como pressão arterial e proteinúria.
 - Acompanhamento e encaminhamento adequado.
