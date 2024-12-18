@@ -255,11 +255,16 @@ As possíveis melhorias e expansões do sistema incluem:
 - **Novos Casos de Uso**: Adicionar outros casos de uso relacionados a área da saúde.
 - **Integração com IA**: Usar IA para interpretar dados enviados e personalizar respostas.
 - **Testes com Outras Plataformas**: Explorar a aplicação em plataformas como WhatsApp ou Signal.
+  
+---
+
+## **Apresentação PoewrPoint do TCC**
+O slide da apresentação se encontra no arquivo do projeto nomeado como: "Rafael Abe - Slide TCC2.pptx"
 
 ---
 
 ## **Vídeo Apresentação do TCC**
-vídeo de apresentação do projeto sendo executando está disponível no arquivo do projeto nomeado como: "Video de Apresentação TCC.MP4" 
+Vídeo de apresentação do projeto sendo executando está disponível no arquivo do projeto nomeado como: "Video de Apresentação TCC.MP4" 
 https://github.com/unlimitedabe/ProjetoTCC#:~:text=Video%20Apresenta%C3%A7%C3%A3o%20TCC.MP4
 
 Ou em qualidade melhor, vídeo de apresentação do projeto sendo executando está disponível no seguinte drive:
